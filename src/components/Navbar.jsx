@@ -17,7 +17,7 @@ export default function Navbar() {
     const mobileMenu = document.getElementById('mobileMenu')
     if (!hamburger || !mobileMenu) return
 
-    // Sync inicial
+    
     mobileMenu.classList.toggle('open', menuOpen)
     hamburger.setAttribute('aria-expanded', String(menuOpen))
     document.body.style.overflow = menuOpen ? 'hidden' : ''

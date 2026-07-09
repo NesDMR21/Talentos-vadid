@@ -3,7 +3,6 @@ import Logo from '../img/Logo.png'
 
 export default function IntroOverlay() {
   useEffect(() => {
-    // Solo limpieza: el CSS maneja el fadeOut
     const el = document.getElementById('intro-overlay')
     if (!el) return
 

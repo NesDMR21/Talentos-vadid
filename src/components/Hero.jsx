@@ -119,7 +119,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* bull (Imagen Flotante, se puede cambiar o dejar) */}
+      {/* bull (Imagen Flotante, lo podemos cambiar o dejarlo) */}
       <img className="hero-bull" src={Logo} alt="" aria-hidden="true" />
     </section>
   )

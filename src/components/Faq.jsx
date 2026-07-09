@@ -33,7 +33,6 @@ function FaqItem({ item, open, onToggle }) {
   useEffect(() => {
     const el = document.getElementById(`faq-a-${item.q}`)
     if (!el) return
-    // Para evitar alertas de lint: setState ocurre luego del render con requestAnimationFrame.
     requestAnimationFrame(() => {
       setMaxHeight(open ? el.scrollHeight : 0)
     })
