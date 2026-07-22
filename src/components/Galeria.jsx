@@ -1,4 +1,65 @@
+import { useState } from "react";
+import GalleryModal from "./GalleryModal";
+
+// Importar imágenes para que Vite las sirva correctamente (no depender de /public)
+import entrenamiento1 from "../img/galeria/entrenamientos/1.jpg";
+import entrenamiento2 from "../img/galeria/entrenamientos/2.jpg";
+import entrenamiento3 from "../img/galeria/entrenamientos/3.jpg";
+import entrenamiento4 from "../img/galeria/entrenamientos/4.jpg";
+import entrenamiento5 from "../img/galeria/entrenamientos/5.jpg";
+import entrenamiento6 from "../img/galeria/entrenamientos/6.jpg";
+
+import competencia from "../img/galeria/competencias/com.jpg";
+import competencia1 from "../img/galeria/competencias/competencia1.jpg";
+import competencia2 from "../img/galeria/competencias/competencia2.jpg";
+import competencia3 from "../img/galeria/competencias/competencia3.jpg";
+
+import evento1 from "../img/galeria/eventos/1.jpg";
+import evento2 from "../img/galeria/eventos/2.jpg";
+import evento3 from "../img/galeria/eventos/3.jpg";
+import evento4 from "../img/galeria/eventos/4.jpg";
+
+import profesor1 from "../img/galeria/profesores/1.jpg";
+import profesor2 from "../img/galeria/profesores/2.jpg";
+import profesor3 from "../img/galeria/profesores/3.jpg";
+import profesor4 from "../img/galeria/profesores/4.jpg";
+
 export default function Galeria() {
+  const [selectedAlbum, setSelectedAlbum] = useState(null);
+  const albums = [
+    {
+      id: 1,
+      title: "Entrenamientos",
+      cover: entrenamiento1,
+      images: [
+        entrenamiento1,
+        entrenamiento2,
+        entrenamiento3,
+        entrenamiento4,
+        entrenamiento5,
+        entrenamiento6,
+      ],
+    },
+    {
+      id: 2,
+      title: "Competencias",
+      cover: competencia,
+      images: [competencia, competencia1, competencia2, competencia3],
+    },
+    {
+      id: 3,
+      title: "Eventos",
+      cover: evento1,
+      images: [evento1, evento2, evento3, evento4],
+    },
+    {
+      id: 4,
+      title: "Profesores",
+      cover: profesor1,
+      images: [profesor1, profesor2, profesor3, profesor4],
+    },
+  ];
+
   return (
     <section id="galeria" className="section">
       <div className="container">
@@ -13,78 +74,26 @@ export default function Galeria() {
         </div>
 
         <div className="gallery-grid" data-aos="fade-up">
-          <div className="gallery-item">
-            <img
-              src="https://images.unsplash.com/photo-1508098682722-e99c643e9337?w=700&q=80"
-              alt="Entrenamiento Vadid"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(20%)' }}
-              loading="lazy"
-            />
-            <div className="gallery-overlay">
-              <span className="gallery-overlay-text">Entrenamiento</span>
-            </div>
-          </div>
+  {albums.map((album) => (
+    <div
+      key={album.id}
+      className="gallery-item"
+      onClick={() => setSelectedAlbum(album)}
+    >
+      <img
+        src={album.cover}
+        alt={album.title}
+        loading="lazy"
+      />
 
-          <div className="gallery-item">
-            <img
-              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=500&q=80"
-              alt="Partido Vadid"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(20%)' }}
-              loading="lazy"
-            />
-            <div className="gallery-overlay">
-              <span className="gallery-overlay-text">Competencia</span>
-            </div>
-          </div>
-
-          <div className="gallery-item">
-            <img
-              src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=500&q=80"
-              alt="Jugadores Vadid"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(20%)' }}
-              loading="lazy"
-            />
-            <div className="gallery-overlay">
-              <span className="gallery-overlay-text">Jugadores</span>
-            </div>
-          </div>
-
-          <div className="gallery-item">
-            <div className="gallery-placeholder">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
-              </svg>
-              <span>Tu foto aquí</span>
-            </div>
-            <div className="gallery-overlay">
-              <span className="gallery-overlay-text">Próximamente</span>
-            </div>
-          </div>
-
-          <div className="gallery-item">
-            <img
-              src="https://images.unsplash.com/photo-1529516548873-9ce57c8f155e?w=700&q=80"
-              alt="Estadio Vadid"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(20%)' }}
-              loading="lazy"
-            />
-            <div className="gallery-overlay">
-              <span className="gallery-overlay-text">Partido</span>
-            </div>
-          </div>
-
-          <div className="gallery-item">
-            <div className="gallery-placeholder">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
-              </svg>
-              <span>Video · Próximamente</span>
-            </div>
-            <div className="gallery-overlay">
-              <span className="gallery-overlay-text">Video</span>
-            </div>
-          </div>
-        </div>
+      <div className="gallery-overlay">
+        <span className="gallery-overlay-text">
+          {album.title}
+        </span>
+      </div>
+    </div>
+  ))}
+</div>
 
         <p
           style={{
@@ -101,6 +110,12 @@ export default function Galeria() {
           Las imágenes serán reemplazadas por fotos reales del club
         </p>
       </div>
+      <GalleryModal
+    key={selectedAlbum?.id ?? "none"}
+    album={selectedAlbum}
+    onClose={() => setSelectedAlbum(null)}
+/>
+
     </section>
   )
 }

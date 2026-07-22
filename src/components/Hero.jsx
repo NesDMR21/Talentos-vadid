@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import Logo from '../img/Logo.png'
 
 function animateCounter(el, target, duration = 1800) {
   let start = 0
@@ -118,9 +117,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      {/* bull (Imagen Flotante, lo podemos cambiar o dejarlo) */}
-      <img className="hero-bull" src={Logo} alt="" aria-hidden="true" />
     </section>
   )
 }

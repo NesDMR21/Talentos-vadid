@@ -1,4 +1,3 @@
-import Logo from '../img/Logo.png'
 import { GiWorld } from "react-icons/gi";
 
 export default function Proyeccion() {
@@ -18,12 +17,9 @@ export default function Proyeccion() {
         <div className="proy-hero-card" data-aos="fade-up">
           <div className="proy-hero-inner">
             <div className="proy-photo">
-              <div className="proy-photo-placeholder">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor" opacity=".3">
-                  <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
-                </svg>
+              <div className="proy-photo-placeholder">                  <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
                 <span>
-                  <img src={Logo} alt="foto de prueba" />
+                  <img src="https://res.cloudinary.com/aes3puw6/image/upload/v1784135287/Captura_de_pantalla_2026-07-15_120755_bxkj4f.png" alt="" />
                 </span>
               </div>
               <div className="proy-photo-overlay" />

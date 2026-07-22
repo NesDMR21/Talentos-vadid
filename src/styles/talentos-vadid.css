@@ -164,12 +164,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .hero-bg{
   position:absolute;inset:0;z-index:0;
   background:linear-gradient(160deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.6) 60%,rgba(0,0,0,.85) 100%),
-  url('https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=1600&q=80') center/cover no-repeat;
+  url('https://res.cloudinary.com/aes3puw6/image/upload/v1784134407/WhatsApp_Image_2026-07-14_at_8.18.18_PM_sbbe45.jpg') center/cover no-repeat;
 }
 .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,var(--black) 0%,transparent 40%);}
 .hero-bull{
   position:absolute;right:-5%;top:50%;transform:translateY(-50%);
-  width:min(700px,80vw);height:auto;opacity:.065;z-index:1;
+  width:min(700px,80vw);height:auto;opacity:.200;z-index:1;
   pointer-events:none;animation:floatBull 8s ease-in-out infinite;
 }
 .hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;padding-top:100px;}
@@ -196,7 +196,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 }
 .hero-cta{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:80px;opacity:0;animation:fadeUp .8s 4.3s forwards;}
 .btn-primary{
-  font-family:var(--font-cond);font-size:.9rem;font-weight:700;
+  font-family:var(--font-cond);font-size:.7rem;font-weight:700;
   letter-spacing:.12em;text-transform:uppercase;padding:14px 36px;
   background:var(--gold);color:var(--black);border-radius:2px;
   transition:background var(--transition),transform var(--transition),box-shadow var(--transition);
@@ -305,7 +305,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .proy-hero-card{background:var(--dark2);border:1px solid rgba(201,168,76,.2);border-radius:6px;overflow:hidden;position:relative;z-index:1;margin-bottom:60px;}
 .proy-hero-inner{display:grid;grid-template-columns:340px 1fr;}
 .proy-photo{background:var(--dark3);min-height:400px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.proy-photo-placeholder{position:absolute;inset:0;background:linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:rgba(245,245,245,.2);}
+.proy-photo-placeholder{position:absolute;inset:0;background:linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:80px;color:rgba(245,245,245,.2);}
 .proy-photo-placeholder span{font-family:var(--font-cond);font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;}
 .proy-photo-overlay{position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,var(--dark2));}
 .proy-info{padding:40px 48px;display:flex;flex-direction:column;justify-content:center;}
@@ -357,7 +357,10 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .gallery-placeholder span{font-family:var(--font-cond);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;}
 .gallery-overlay{position:absolute;inset:0;background:linear-gradient(160deg,transparent 50%,rgba(0,0,0,.8));opacity:0;transition:opacity var(--transition);display:flex;align-items:flex-end;padding:20px;}
 .gallery-item:hover .gallery-overlay{opacity:1;}
-.gallery-overlay-text{font-family:var(--font-cond);font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);}
+.gallery-overlay-text{font-family:var(--font-cond);font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(238, 255, 0, 0.8);}
+.gallery-item{cursor:pointer;overflow:hidden;position:relative;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:.4s;}
+.gallery-item:hover img{transform:scale(1.08);}
 
 /* ─── SEDES ─── */
 #sedes{background:var(--black);position:relative;overflow:hidden;}
@@ -473,4 +476,42 @@ footer{background:var(--dark2);border-top:1px solid rgba(201,168,76,.12);}
   .proy-highlight{grid-template-columns:1fr;}
   .footer-top{grid-template-columns:1fr;}
 }
+
+/* ==========================================
+   MODAL GALERÍA
+========================================== */
+.gallery-modal{position:fixed;inset:0;background:rgba(0,0,0,.90);display:flex;justify-content:center;align-items:center;z-index:9999;animation:fadeIn .35s ease;}
+.gallery-content{position:relative;width:90%;max-width:1100px;background:#111;border-radius:18px;overflow:hidden;padding:30px;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:zoomIn .35s ease;}
+.gallery-content h2{text-align:center;color:white;margin-bottom:20px;font-size:2rem;}
+.gallery-main-image{width:100%;max-height:600px;object-fit:cover;border-radius:15px;user-select:none;}
+.close-gallery{position:absolute;top:15px;right:20px;width:45px;height:45px;border:none;border-radius:50%;background:#d4af37;color:white;font-size:22px;cursor:pointer;transition:.3s;}
+.close-gallery:hover{transform:rotate(90deg);background:#b99625;}
+.gallery-prev,
+.gallery-next{position:absolute;top:50%;transform:translateY(-50%);width:55px;height:55px;border:none;border-radius:50%;background:rgba(255,255,255,.15);color:white;font-size:30px;cursor:pointer;transition:.3s;backdrop-filter:blur(10px);}
+.gallery-prev:hover,
+.gallery-next:hover{background:#d4af37;}
+.gallery-prev{left:20px;}
+.gallery-next{right:20px;}
+.gallery-counter{margin-top:20px;color:white;text-align:center;font-size:1rem;letter-spacing:2px;}
+.gallery-thumbnails{display:flex;justify-content:center;gap:12px;margin-top:20px;flex-wrap:wrap;}
+.gallery-thumbnails img{width:90px;height:70px;object-fit:cover;border-radius:10px;cursor:pointer;opacity:.5;transition:.3s;border:3px solid transparent;}
+.gallery-thumbnails img:hover{opacity:1;transform:scale(1.08);}
+.gallery-thumbnails img.active{opacity:1;border-color:#d4af37;}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+@keyframes zoomIn{
+from{transform:scale(.8);opacity:0;}to{transform:scale(1);opacity:1;}}
+
+@media(max-width:768px){
+
+.gallery-content{width:95%;padding:15px;}
+.gallery-content h2{font-size:1.3rem;}
+.gallery-main-image{max-height:350px;}
+.gallery-prev,
+.gallery-next{width:45px;height:45px;font-size:24px;}
+.gallery-thumbnails img{width:65px;height:55px;}}
 

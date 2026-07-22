@@ -12,7 +12,7 @@ export default function Sobre() {
           <div className="sobre-visual" data-aos="fade-right">
             <div className="sobre-img">
               <img
-                src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=600&q=80"
+                src="https://res.cloudinary.com/aes3puw6/image/upload/v1784134408/WhatsApp_Image_2026-07-15_at_11.25.56_AM_nkdipm.jpg"
                 alt="Entrenamiento Club Deportivo Talentos Vadid"
                 loading="lazy"
               />
