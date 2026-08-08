@@ -1,6 +1,51 @@
+import { useState } from 'react'
+import { CATEGORIES, TEAMS, galleryImages } from '../data/gallery.js'
+import { shuffle } from '../utils/shuffle.js'
+import GaleriaDestacada from './GaleriaDestacada.jsx'
+import Lightbox from './Lightbox.jsx'
+
+const BATCH_SIZE = 9
+
 export default function Galeria() {
+  const [shuffledImages] = useState(() => shuffle(galleryImages))
+  const [activeCategory, setActiveCategory] = useState('todas')
+  const [activeTeam, setActiveTeam] = useState('todas')
+  const [visibleCount, setVisibleCount] = useState(BATCH_SIZE)
+  const [lightboxIndex, setLightboxIndex] = useState(null)
+
+  const visibleCategories = CATEGORIES.filter((cat) =>
+    galleryImages.some((img) => img.category === cat.key)
+  )
+
+  const teamsInCategory =
+    activeCategory === 'todas'
+      ? []
+      : TEAMS.filter((team) =>
+          galleryImages.some((img) => img.category === activeCategory && img.team === team.key)
+        )
+
+  const selectCategory = (key) => {
+    setActiveCategory(key)
+    setActiveTeam('todas')
+    setVisibleCount(BATCH_SIZE)
+  }
+
+  const selectTeam = (key) => {
+    setActiveTeam(key)
+    setVisibleCount(BATCH_SIZE)
+  }
+
+  const filtered = shuffledImages.filter((img) => {
+    if (activeCategory !== 'todas' && img.category !== activeCategory) return false
+    if (activeCategory !== 'todas' && activeTeam !== 'todas' && img.team !== activeTeam) return false
+    return true
+  })
+
+  const visible = filtered.slice(0, visibleCount)
+  const remaining = filtered.length - visible.length
+
   return (
-    <section id="galeria" className="section">
+    <section id="galeria" className="section section--sm">
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: 48 }} data-aos="fade-up">
           <p className="section-tag" style={{ justifyContent: 'center' }}>
@@ -12,96 +57,107 @@ export default function Galeria() {
           <div className="gold-line" style={{ margin: '0 auto' }} />
         </div>
 
-        <div className="gallery-grid" data-aos="fade-up">
-          <div className="gallery-item">
-            <img
-              src="https://images.unsplash.com/photo-1508098682722-e99c643e9337?w=700&q=80"
-              alt="Entrenamiento Vadid"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(20%)' }}
-              loading="lazy"
-            />
-            <div className="gallery-overlay">
-              <span className="gallery-overlay-text">Entrenamiento</span>
-            </div>
-          </div>
+        <GaleriaDestacada />
 
-          <div className="gallery-item">
-            <img
-              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=500&q=80"
-              alt="Partido Vadid"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(20%)' }}
-              loading="lazy"
-            />
-            <div className="gallery-overlay">
-              <span className="gallery-overlay-text">Competencia</span>
-            </div>
+        {visibleCategories.length > 0 && (
+          <div className="tabs-nav" style={{ justifyContent: 'center' }} data-aos="fade-up">
+            <button
+              className={'tab-btn' + (activeCategory === 'todas' ? ' active' : '')}
+              onClick={() => selectCategory('todas')}
+            >
+              Todas
+            </button>
+            {visibleCategories.map((cat) => (
+              <button
+                key={cat.key}
+                className={'tab-btn' + (activeCategory === cat.key ? ' active' : '')}
+                onClick={() => selectCategory(cat.key)}
+              >
+                {cat.label}
+              </button>
+            ))}
           </div>
+        )}
 
-          <div className="gallery-item">
-            <img
-              src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=500&q=80"
-              alt="Jugadores Vadid"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(20%)' }}
-              loading="lazy"
-            />
-            <div className="gallery-overlay">
-              <span className="gallery-overlay-text">Jugadores</span>
-            </div>
+        {teamsInCategory.length > 0 && (
+          <div className="tabs-nav tabs-nav--sub" style={{ justifyContent: 'center' }} data-aos="fade-up">
+            <button
+              className={'tab-btn' + (activeTeam === 'todas' ? ' active' : '')}
+              onClick={() => selectTeam('todas')}
+            >
+              Todas las edades
+            </button>
+            {teamsInCategory.map((team) => (
+              <button
+                key={team.key}
+                className={'tab-btn' + (activeTeam === team.key ? ' active' : '')}
+                onClick={() => selectTeam(team.key)}
+              >
+                {team.label}
+              </button>
+            ))}
           </div>
+        )}
 
-          <div className="gallery-item">
-            <div className="gallery-placeholder">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
-              </svg>
-              <span>Tu foto aquí</span>
+        {filtered.length > 0 ? (
+          <>
+            <div className="gallery-grid" data-aos="fade-up">
+              {visible.map((item, idx) => (
+                <div
+                  key={item.id}
+                  className="gallery-item"
+                  onClick={() => setLightboxIndex(idx)}
+                >
+                  <img
+                    src={item.thumb}
+                    alt={item.alt}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(20%)' }}
+                    loading="lazy"
+                  />
+                  <div className="gallery-overlay">
+                    <span className="gallery-overlay-text">{item.alt}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="gallery-overlay">
-              <span className="gallery-overlay-text">Próximamente</span>
-            </div>
-          </div>
 
-          <div className="gallery-item">
-            <img
-              src="https://images.unsplash.com/photo-1529516548873-9ce57c8f155e?w=700&q=80"
-              alt="Estadio Vadid"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(20%)' }}
-              loading="lazy"
-            />
-            <div className="gallery-overlay">
-              <span className="gallery-overlay-text">Partido</span>
-            </div>
-          </div>
-
-          <div className="gallery-item">
-            <div className="gallery-placeholder">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
-              </svg>
-              <span>Video · Próximamente</span>
-            </div>
-            <div className="gallery-overlay">
-              <span className="gallery-overlay-text">Video</span>
-            </div>
-          </div>
-        </div>
-
-        <p
-          style={{
-            textAlign: 'center',
-            marginTop: 32,
-            fontSize: '.82rem',
-            color: 'rgba(245,245,245,.25)',
-            fontFamily: 'var(--font-cond)',
-            letterSpacing: '.1em',
-            textTransform: 'uppercase',
-          }}
-          data-aos="fade-up"
-        >
-          Las imágenes serán reemplazadas por fotos reales del club
-        </p>
+            {remaining > 0 && (
+              <div style={{ textAlign: 'center', marginTop: 32 }}>
+                <button
+                  className="btn-primary"
+                  onClick={() => setVisibleCount((v) => Math.min(v + BATCH_SIZE, filtered.length))}
+                >
+                  Ver más fotos ({remaining})
+                </button>
+              </div>
+            )}
+          </>
+        ) : (
+          <p
+            style={{
+              textAlign: 'center',
+              marginTop: 32,
+              fontSize: '.82rem',
+              color: 'rgba(245,245,245,.25)',
+              fontFamily: 'var(--font-cond)',
+              letterSpacing: '.1em',
+              textTransform: 'uppercase',
+            }}
+            data-aos="fade-up"
+          >
+            Muy pronto: fotos y videos reales de nuestros entrenamientos y torneos
+          </p>
+        )}
       </div>
+
+      {lightboxIndex !== null && (
+        <Lightbox
+          images={filtered}
+          index={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onNavigate={setLightboxIndex}
+        />
+      )}
     </section>
   )
 }
-

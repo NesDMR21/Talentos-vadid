@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import Logo from '../img/Logo.png'
 
 function animateCounter(el, target, duration = 1800) {
   let start = 0
@@ -38,19 +37,6 @@ export default function Hero() {
     obs.observe(heroStats)
 
     return () => obs.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (window.innerWidth <= 768) return
-
-    const onScroll = () => {
-      const y = window.scrollY
-      const bull = document.querySelector('.hero-bull')
-      if (bull) bull.style.transform = `translateY(calc(-50% + ${y * 0.08}px))`
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
@@ -118,9 +104,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      {/* bull (Imagen Flotante, lo podemos cambiar o dejarlo) */}
-      <img className="hero-bull" src={Logo} alt="" aria-hidden="true" />
     </section>
   )
 }

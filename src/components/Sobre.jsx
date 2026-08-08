@@ -2,6 +2,7 @@ import { IoMdFootball } from "react-icons/io";
 import { FaHorseHead } from "react-icons/fa";
 import { GiMightyForce } from "react-icons/gi";
 import { IoAirplaneSharp } from "react-icons/io5";
+import sobreImg from '../img/sobre.jpg'
 
 
 export default function Sobre() {
@@ -12,7 +13,7 @@ export default function Sobre() {
           <div className="sobre-visual" data-aos="fade-right">
             <div className="sobre-img">
               <img
-                src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=600&q=80"
+                src={sobreImg}
                 alt="Entrenamiento Club Deportivo Talentos Vadid"
                 loading="lazy"
               />

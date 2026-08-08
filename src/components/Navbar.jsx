@@ -57,7 +57,10 @@ export default function Navbar() {
               <a href="#categorias">Categorías</a>
             </li>
             <li>
-              <a href="#formacion">Formación</a>
+              <a href="#staff">Staff</a>
+            </li>
+            <li>
+              <a href="#metodologia">Método</a>
             </li>
             <li>
               <a href="#proyeccion">Proyección</a>
@@ -96,8 +99,11 @@ export default function Navbar() {
         <a href="#categorias" className="mob-link">
           Categorías
         </a>
-        <a href="#formacion" className="mob-link">
-          Formación
+        <a href="#staff" className="mob-link">
+          Staff
+        </a>
+        <a href="#metodologia" className="mob-link">
+          Método
         </a>
         <a href="#proyeccion" className="mob-link">
           Proyección
