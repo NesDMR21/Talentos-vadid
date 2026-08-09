@@ -1,8 +1,43 @@
 import { GiWorld } from "react-icons/gi";
+import Tabs from './Tabs.jsx'
+import johanCamposImg from '../img/johan-campos.jpg'
+
+const etapas = [
+  {
+    year: '2017 · 11 años',
+    title: 'Llegada a Talentos Vadid',
+    text: 'Johan se une a la academia con grandes condiciones físicas pero aún en proceso de formación técnica. El trabajo comienza desde los fundamentos.',
+  },
+  {
+    year: '2019–2021 · 13–15 años',
+    title: 'Formación Técnica & Competitiva',
+    text: 'Participación en torneos locales. Vadid potencia su técnica individual, inteligencia táctica y preparación física. Primeras oportunidades en clubes externos.',
+  },
+  {
+    year: '2022–2023 · 16–17 años',
+    title: 'Alto Rendimiento & Preparación Mental',
+    text: 'Incorporación al programa de alto rendimiento con acompañamiento psicológico. Johan consolida su perfil como mediocampista de proyección.',
+  },
+  {
+    year: '2024 · 18 años',
+    title: '🇭🇷 NK Prigorje, Croacia',
+    text: 'Tras 7 años de proceso formativo, Johan Campos firma con el club NK Prigorje en Croacia. Su historia demuestra que con talento, trabajo y el sistema correcto, los sueños se convierten en realidad.',
+  },
+]
+
+function EtapaPanel({ etapa }) {
+  return (
+    <div className="tl-content">
+      <div className="tl-year">{etapa.year}</div>
+      <div className="tl-title">{etapa.title}</div>
+      <div className="tl-text">{etapa.text}</div>
+    </div>
+  )
+}
 
 export default function Proyeccion() {
   return (
-    <section id="proyeccion" className="section">
+    <section id="proyeccion" className="section section--md">
       <div className="container">
         <div className="proy-header" data-aos="fade-up">
           <p className="section-tag" style={{ justifyContent: 'center' }}>
@@ -17,17 +52,13 @@ export default function Proyeccion() {
         <div className="proy-hero-card" data-aos="fade-up">
           <div className="proy-hero-inner">
             <div className="proy-photo">
-              <div className="proy-photo-placeholder">                  <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
-                <span>
-                  <img src="https://res.cloudinary.com/aes3puw6/image/upload/v1784135287/Captura_de_pantalla_2026-07-15_120755_bxkj4f.png" alt="" />
-                </span>
-              </div>
+              <img src={johanCamposImg} alt="Johan Campos" loading="lazy" />
               <div className="proy-photo-overlay" />
             </div>
 
             <div className="proy-info">
               <h3 className="proy-name">
-                JOAN <span>CAMPOS</span>
+                JOHAN <span>CAMPOS</span>
               </h3>
               <p className="proy-role">Centrocampista · Bogotá, Colombia</p>
 
@@ -47,7 +78,7 @@ export default function Proyeccion() {
               </div>
 
               <p className="proy-desc">
-                Joan llegó a Talentos Vadid con apenas 11 años y un sueño. Durante 7 años de formación integral —técnica, física, táctica y mental— se convirtió en uno de los referentes de nuestra academia. Su dedicación, disciplina y talento lo llevaron más lejos de lo que muchos imaginaban.
+                Johan llegó a Talentos Vadid con apenas 11 años y un sueño. Durante 7 años de formación integral —técnica, física, táctica y mental— se convirtió en uno de los referentes de nuestra academia. Su dedicación, disciplina y talento lo llevaron más lejos de lo que muchos imaginaban.
               </p>
 
               <div className="destination-badge">
@@ -69,7 +100,7 @@ export default function Proyeccion() {
             letterSpacing: '.15em',
             textTransform: 'uppercase',
             color: 'rgba(201,168,76,.6)',
-            marginBottom: 40,
+            marginBottom: 24,
             textAlign: 'center',
           }}
           data-aos="fade-up"
@@ -77,65 +108,10 @@ export default function Proyeccion() {
           — Su Camino —
         </h3>
 
-        <div className="timeline" data-aos="fade-up">
-          <div className="tl-item">
-            <div className="tl-dot">
-              <div className="tl-dot-circle" />
-              <div className="tl-dot-inner" />
-            </div>
-            <div className="tl-content">
-              <div className="tl-year">2017 · 11 años</div>
-              <div className="tl-title">Llegada a Talentos Vadid</div>
-              <div className="tl-text">
-                Joan se une a la academia con grandes condiciones físicas pero aún en proceso de formación técnica. El trabajo comienza desde los fundamentos.
-              </div>
-            </div>
-          </div>
-
-          <div className="tl-item">
-            <div className="tl-dot">
-              <div className="tl-dot-circle" />
-              <div className="tl-dot-inner" />
-            </div>
-            <div className="tl-content">
-              <div className="tl-year">2019–2021 · 13–15 años</div>
-              <div className="tl-title">Formación Técnica & Competitiva</div>
-              <div className="tl-text">
-                Participación en torneos locales. Vadid potencia su técnica individual, inteligencia táctica y preparación física. Primeras oportunidades en clubes externos.
-              </div>
-            </div>
-          </div>
-
-          <div className="tl-item">
-            <div className="tl-dot">
-              <div className="tl-dot-circle" />
-              <div className="tl-dot-inner" />
-            </div>
-            <div className="tl-content">
-              <div className="tl-year">2022–2023 · 16–17 años</div>
-              <div className="tl-title">Alto Rendimiento & Preparación Mental</div>
-              <div className="tl-text">
-                Incorporación al programa de alto rendimiento con acompañamiento psicológico. Joan consolida su perfil como mediocampista de proyección.
-              </div>
-            </div>
-          </div>
-
-          <div className="tl-item">
-            <div className="tl-dot">
-              <div className="tl-dot-circle" />
-              <div className="tl-dot-inner" />
-            </div>
-            <div className="tl-content">
-              <div className="tl-year">2024 · 18 años</div>
-              <div className="tl-title">🇭🇷 NK Prigorje, Croacia</div>
-              <div className="tl-text">
-                Tras 7 años de proceso formativo, Joan Campos firma con el club NK Prigorje en Croacia. Su historia demuestra que con talento, trabajo y el sistema correcto, los sueños se convierten en realidad.
-              </div>
-            </div>
-          </div>
+        <div className="tl-tabs" data-aos="fade-up">
+          <Tabs items={etapas.map((etapa) => ({ label: etapa.year.split(' · ')[0], content: <EtapaPanel etapa={etapa} /> }))} />
         </div>
       </div>
     </section>
   )
 }
-

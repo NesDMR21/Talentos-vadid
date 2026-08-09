@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar.jsx'
 import Hero from '../components/Hero.jsx'
 import Sobre from '../components/Sobre.jsx'
 import Categorias from '../components/Categorias.jsx'
-import Formacion from '../components/Formacion.jsx'
+import Staff from '../components/Staff.jsx'
 import Metodologia from '../components/Metodologia.jsx'
 import Proyeccion from '../components/Proyeccion.jsx'
 import Torneos from '../components/Torneos.jsx'
@@ -30,7 +30,7 @@ export default function Landing() {
         <Hero />
         <Sobre />
         <Categorias />
-        <Formacion />
+        <Staff />
         <Metodologia />
         <Proyeccion />
         <Torneos />

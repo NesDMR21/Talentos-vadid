@@ -8,7 +8,7 @@ import { GiStarFormation } from "react-icons/gi";
 
 export default function Torneos() {
   return (
-    <section id="torneos" className="section">
+    <section id="torneos" className="section section--sm">
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: 56 }} data-aos="fade-up">
           <p className="section-tag" style={{ justifyContent: 'center' }}>

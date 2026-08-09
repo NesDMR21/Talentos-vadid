@@ -55,7 +55,7 @@ export default function Faq() {
   const [openIndex, setOpenIndex] = useState(null)
 
   return (
-    <section id="faq" className="section">
+    <section id="faq" className="section section--sm">
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: 56 }} data-aos="fade-up">
           <p className="section-tag" style={{ justifyContent: 'center' }}>
