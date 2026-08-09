@@ -106,7 +106,16 @@ export default function Galeria() {
                 <div
                   key={item.id}
                   className="gallery-item"
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Ver imagen ampliada: ${item.alt}`}
                   onClick={() => setLightboxIndex(idx)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      setLightboxIndex(idx)
+                    }
+                  }}
                 >
                   <img
                     src={item.thumb}
