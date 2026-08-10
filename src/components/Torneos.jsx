@@ -1,10 +1,7 @@
-import { GiTrophyCup } from "react-icons/gi";
-import { IoMdFootball } from "react-icons/io";
-import { FaMedal } from "react-icons/fa";
-import { CiMedal } from "react-icons/ci";
-import { GiStarFormation } from "react-icons/gi";
-
-
+import { GiTrophyCup, GiStarFormation } from 'react-icons/gi'
+import { IoMdFootball } from 'react-icons/io'
+import { FaMedal } from 'react-icons/fa'
+import { CiMedal } from 'react-icons/ci'
 
 export default function Torneos() {
   return (

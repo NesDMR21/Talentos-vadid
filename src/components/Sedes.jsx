@@ -1,3 +1,24 @@
+const sedes = [
+  {
+    name: 'Parque Gilma Jiménez',
+    address: 'Bogotá DC · Suroriente',
+    mapsQuery: 'Parque Gilma Jiménez, Bogotá DC',
+  },
+  {
+    name: 'Canchas Nico — Suba',
+    address: 'Bogotá DC · Localidad de Suba',
+    mapsQuery: 'Canchas Nico, Suba, Bogotá DC',
+  },
+]
+
+function mapsUrl(query) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`
+}
+
+function mapsEmbedUrl(query) {
+  return `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`
+}
+
 export default function Sedes() {
   return (
     <section id="sedes" className="section">
@@ -13,51 +34,42 @@ export default function Sedes() {
         </div>
 
         <div className="sedes-grid">
-          <div className="sede-card" data-aos="fade-up" data-aos-delay="0">
-            <div className="sede-map">
-              <span style={{ position: 'relative', zIndex: 1 }}>📍</span>
-            </div>
-            <div className="sede-body">
-              <h3 className="sede-name">Parque Gilma Jiménez</h3>
-              <p className="sede-address">Bogotá DC · Suroriente</p>
-              <p className="horarios-title">Horarios de entrenamiento</p>
-              <div className="horario-row">
-                <span className="horario-dia">Lunes y Viernes</span>
-                <span className="horario-hora">6:00PM – 8:00PM</span>
+          {sedes.map((sede, idx) => (
+            <div className="sede-card" key={sede.name} data-aos="fade-up" data-aos-delay={idx * 120}>
+              <div className="sede-map">
+                <iframe
+                  title={`Mapa de ${sede.name}`}
+                  src={mapsEmbedUrl(sede.mapsQuery)}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
               </div>
-              <div className="horario-row">
-                <span className="horario-dia">Miércoles</span>
-                <span className="horario-hora">4:00PM – 6:00PM</span>
-              </div>
-              <div className="horario-row">
-                <span className="horario-dia">Sábados y Domingos</span>
-                <span className="horario-hora">8:00AM – 10:00AM</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="sede-card" data-aos="fade-up" data-aos-delay="120">
-            <div className="sede-map">
-              <span style={{ position: 'relative', zIndex: 1 }}>📍</span>
-            </div>
-            <div className="sede-body">
-              <h3 className="sede-name">Canchas Nico — Suba</h3>
-              <p className="sede-address">Bogotá DC · Localidad de Suba</p>
-              <p className="horarios-title">Horarios de entrenamiento</p>
-              <div className="horario-row">
-                <span className="horario-dia">Lunes y Viernes</span>
-                <span className="horario-hora">6:00PM – 8:00PM</span>
-              </div>
-              <div className="horario-row">
-                <span className="horario-dia">Miércoles</span>
-                <span className="horario-hora">4:00PM – 6:00PM</span>
-              </div>
-              <div className="horario-row">
-                <span className="horario-dia">Sábados y Domingos</span>
-                <span className="horario-hora">8:00AM – 10:00AM</span>
+              <div className="sede-body">
+                <h3 className="sede-name">{sede.name}</h3>
+                <p className="sede-address">
+                  {sede.address}
+                  {' · '}
+                  <a href={mapsUrl(sede.mapsQuery)} target="_blank" rel="noopener">
+                    Ver en Google Maps
+                  </a>
+                </p>
+                <p className="horarios-title">Horarios de entrenamiento</p>
+                <div className="horario-row">
+                  <span className="horario-dia">Lunes y Viernes</span>
+                  <span className="horario-hora">6:00PM – 8:00PM</span>
+                </div>
+                <div className="horario-row">
+                  <span className="horario-dia">Miércoles</span>
+                  <span className="horario-hora">4:00PM – 6:00PM</span>
+                </div>
+                <div className="horario-row">
+                  <span className="horario-dia">Sábados y Domingos</span>
+                  <span className="horario-hora">8:00AM – 10:00AM</span>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
 
         <div className="sedes-invite" data-aos="fade-up">

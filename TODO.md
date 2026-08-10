@@ -1,10 +1,16 @@
-# TODO - Conversión a React + Vite (Talentos Vadid)
+# TODO — Talentos Vadid
 
-- [ ] Crear estructura de componentes/páginas (Landing + secciones por componente)
-- [ ] Mover el CSS del HTML a `src/styles/talentos-vadid.css` e importarlo globalmente
-- [ ] Implementar hooks/lógica: AOS init, navbar scrolled, menú hamburguesa, counters, FAQ accordion, form WhatsApp, overlay cleanup, parallax
-- [ ] Implementar componentes visuales: IntroOverlay, Navbar/MobileMenu, Hero, Sobre, Categorias, Formacion, Metodologia, Proyeccion, Torneos, Galeria, Sedes, Faq, Contacto, Footer, WaFloat
-- [ ] Actualizar `src/App.jsx` para renderizar `Landing.jsx`
-- [ ] Verificar/ajustar dependencias: instalar `aos` si no existe
-- [ ] Correr `npm run dev` y revisar comportamiento (desktop/mobile)
+La conversión inicial a React + Vite (estructura de componentes, CSS global, hooks de AOS/navbar/FAQ/counters) ya está completa. Ver `CLAUDE.md` para la guía del proyecto y las convenciones de código.
 
+## Pendiente (prioridad baja)
+
+- [ ] Panel de "logros" en `Torneos.jsx` (marcado como "en construcción")
+- [ ] Fotos reales para carpetas de galería que solo tienen `.gitkeep` (comunidad, sedes, jugadores sub-8/12/16)
+- [ ] Breakpoint intermedio de tablet (~900px)
+- [ ] Soporte de swipe táctil en Lightbox/Galería para mobile
+- [ ] Ajustar posición/tamaño de WaFloat en mobile con `safe-area-inset`
+- [ ] SEO: `lang="es"` en `index.html`, meta description, Open Graph tags, arreglar MIME type del favicon
+- [ ] Datos estructurados schema.org (SportsActivityLocation) para las sedes
+- [ ] Analítica básica (visitas, clics en CTA/WhatsApp)
+- [ ] Sección de testimonios
+- [ ] Nota de tratamiento de datos junto al formulario de contacto

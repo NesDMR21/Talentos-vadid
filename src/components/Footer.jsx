@@ -1,9 +1,7 @@
 import Logo from '../img/Logo.png'
-import { MdOutlineAlternateEmail } from "react-icons/md";
-import { AiFillInstagram } from "react-icons/ai";
-import { AiFillTikTok } from "react-icons/ai";
-import { FaFacebook } from "react-icons/fa";
-import { FaWhatsappSquare } from "react-icons/fa";
+import { MdOutlineAlternateEmail } from 'react-icons/md'
+import { AiFillInstagram, AiFillTikTok } from 'react-icons/ai'
+import { FaFacebook, FaWhatsappSquare } from 'react-icons/fa'
 
 export default function Footer() {
   return (
@@ -34,7 +32,7 @@ export default function Footer() {
                 <a href="#categorias">Categorías</a>
               </li>
               <li>
-                <a href="#formacion">Formación Integral</a>
+                <a href="#metodologia">Formación Integral</a>
               </li>
               <li>
                 <a href="#metodologia">Metodología</a>
