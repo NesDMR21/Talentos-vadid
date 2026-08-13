@@ -28,6 +28,15 @@ npm run preview  # preview del build
 - `src/data/staff.js` — datos del staff, fotos en `src/img/staff/`.
 - `src/styles/talentos-vadid.css` — único archivo CSS global (sin CSS modules).
 
+## Formulario de inscripción (`Contacto.jsx`)
+
+Al enviar el formulario pasan dos cosas en paralelo, ambas dentro de `onSubmit`:
+
+- Se abre WhatsApp (`wa.me/573134565039`) con el mensaje prellenado — comportamiento original, sin cambios.
+- `saveToSheet()` hace un POST best-effort (`fetch` con `mode:'no-cors'`, error silenciado) a `SHEET_ENDPOINT`, la URL de un Google Apps Script Web App que agrega la inscripción como fila en una Google Sheet y manda un correo de aviso a `clubvadid.futbol@gmail.com`. Si ese POST falla, no bloquea ni afecta la apertura de WhatsApp.
+
+El código fuente del Apps Script (`doPost`, guarda en la Sheet + `MailApp.sendEmail`) está respaldado en `docs/apps-script-inscripciones.gs` — no se ejecuta desde el repo, hay que pegarlo en el editor de Apps Script vinculado a la Sheet real. Guía de uso para el equipo no técnico en `docs/GUIA-INSCRIPCIONES.md`.
+
 ## Convenciones de código
 
 - Imports: comillas simples, sin `;`, agrupando named imports del mismo paquete (`import { AiFillInstagram, AiFillTikTok } from 'react-icons/ai'`). Varios componentes antiguos mezclan estilos (comillas dobles + `;`) — al tocar un archivo, normalizar al estilo de comillas simples/sin `;`.

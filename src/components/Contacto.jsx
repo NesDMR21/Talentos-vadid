@@ -30,6 +30,20 @@ function buildWaMessage(data) {
   )
 }
 
+// Web App de Google Apps Script que guarda cada inscripción en una Google
+// Sheet y avisa por correo a clubvadid.futbol@gmail.com. Código fuente y
+// pasos de despliegue en docs/apps-script-inscripciones.gs y CLAUDE.md.
+const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw6qlCWfbIiGxqnflP0wPTSnSOadSCLXDX2XPdtsXW6pPCGwpCXeSQhbHhaHl6P0oUfaw/exec'
+
+function saveToSheet(data) {
+  fetch(SHEET_ENDPOINT, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(data),
+  }).catch(() => {})
+}
+
 export default function Contacto() {
   const waNumber = '573134565039'
   const action = useMemo(() => `https://wa.me/${waNumber}`, [waNumber])
@@ -52,6 +66,7 @@ export default function Contacto() {
 
     const waMsg = buildWaMessage({ nombre, edad, categoria, email, telefono, acudiente, mensaje })
 
+    saveToSheet({ nombre, edad, categoria, email, telefono, acudiente, mensaje })
     window.open(`${action}?text=${waMsg}`, '_blank', 'noopener')
   }
 
