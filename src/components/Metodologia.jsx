@@ -1,12 +1,8 @@
-import { CgGym } from "react-icons/cg";
-import { GiPrayer } from "react-icons/gi";
-import { PiBowlFoodBold } from "react-icons/pi";
-import { PiShootingStarFill } from "react-icons/pi";
-import { GiHiveMind } from "react-icons/gi";
-import { GiSoccerKick } from "react-icons/gi";
-import { GiWeightLiftingUp } from "react-icons/gi";
-import { GrDocumentPerformance } from "react-icons/gr";
-import { TbRulerMeasure } from "react-icons/tb";
+import { CgGym } from 'react-icons/cg'
+import { GiPrayer, GiHiveMind, GiSoccerKick, GiWeightLiftingUp } from 'react-icons/gi'
+import { PiBowlFoodBold, PiShootingStarFill } from 'react-icons/pi'
+import { GrDocumentPerformance } from 'react-icons/gr'
+import { TbRulerMeasure } from 'react-icons/tb'
 import Tabs from './Tabs.jsx'
 import metodologiaImg from '../img/metodologia.jpg'
 

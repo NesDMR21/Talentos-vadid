@@ -1,9 +1,8 @@
-import { IoMdFootball } from "react-icons/io";
-import { FaHorseHead } from "react-icons/fa";
-import { GiMightyForce } from "react-icons/gi";
-import { IoAirplaneSharp } from "react-icons/io5";
+import { IoMdFootball } from 'react-icons/io'
+import { FaHorseHead } from 'react-icons/fa'
+import { GiMightyForce } from 'react-icons/gi'
+import { IoAirplaneSharp } from 'react-icons/io5'
 import sobreImg from '../img/sobre.jpg'
-
 
 export default function Sobre() {
   return (

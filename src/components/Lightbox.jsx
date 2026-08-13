@@ -19,7 +19,9 @@ export default function Lightbox({ images, index, onClose, onNavigate }) {
   if (!current) return null
 
   return (
-    <div className="lightbox" onClick={onClose}>
+    <div className="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imagen">
+      <button type="button" className="lightbox-backdrop" aria-label="Cerrar visor de imagen" onClick={onClose} />
+
       <button className="lightbox-close" aria-label="Cerrar" onClick={onClose}>
         ✕
       </button>
@@ -28,30 +30,19 @@ export default function Lightbox({ images, index, onClose, onNavigate }) {
         <button
           className="lightbox-nav lightbox-prev"
           aria-label="Foto anterior"
-          onClick={(e) => {
-            e.stopPropagation()
-            onNavigate((index - 1 + images.length) % images.length)
-          }}
+          onClick={() => onNavigate((index - 1 + images.length) % images.length)}
         >
           ‹
         </button>
       )}
 
-      <img
-        className="lightbox-img"
-        src={current.src}
-        alt={current.alt}
-        onClick={(e) => e.stopPropagation()}
-      />
+      <img className="lightbox-img" src={current.src} alt={current.alt} />
 
       {images.length > 1 && (
         <button
           className="lightbox-nav lightbox-next"
           aria-label="Foto siguiente"
-          onClick={(e) => {
-            e.stopPropagation()
-            onNavigate((index + 1) % images.length)
-          }}
+          onClick={() => onNavigate((index + 1) % images.length)}
         >
           ›
         </button>
