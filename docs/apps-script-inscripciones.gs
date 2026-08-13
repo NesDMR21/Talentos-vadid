@@ -5,7 +5,7 @@
 // pasos de configuración y CLAUDE.md para cómo se conecta con Contacto.jsx.
 
 const SHEET_NAME = 'Inscripciones'
-const NOTIFY_EMAIL = 'clubvadid.futbol@gmail.com'
+const NOTIFY_EMAIL = 'garciajuandiego11@gmail.com'
 
 function doPost(e) {
   const data = JSON.parse(e.postData.contents)
