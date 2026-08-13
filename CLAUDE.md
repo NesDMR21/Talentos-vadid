@@ -8,7 +8,7 @@ Landing page del Club Deportivo Talentos Vadid (Bogotá DC). SPA en React + Vite
 - `aos` para animaciones on-scroll (inicializado en `InitAos.jsx`)
 - `react-icons` para iconografía (Ai/Fa)
 - `vite-imagetools` para variantes de imagen (webp)
-- ESLint flat config (`eslint.config.js`) con `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh` y `eslint-plugin-jsx-a11y`
+- ESLint flat config (`eslint.config.js`) con `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`, `eslint-plugin-jsx-a11y` y `eslint-plugin-react` (solo la regla `react/jsx-uses-vars`, ver nota abajo)
 - Sin TypeScript, sin PropTypes, sin Prettier — el estilo se mantiene a mano (ver convenciones abajo)
 
 ## Comandos
@@ -45,6 +45,7 @@ El código fuente del Apps Script (`doPost`, guarda en la Sheet + `MailApp.sendE
 - Mobile-first no aplica aquí: los breakpoints son desktop-first (`max-width: 1024px / 768px / 500px`) en `talentos-vadid.css`. No hay breakpoint intermedio de tablet (~900px) todavía.
 - `#hero` usa `100svh` (no `100vh`) para evitar el salto de la barra de direcciones en Safari — mantener ese patrón si se agregan más secciones full-height.
 - Inputs de formulario deben usar `font-size: 1rem` mínimo (16px) para evitar el zoom automático de iOS Safari al enfocar.
+- ESLint 9 no trackea nativamente las referencias a identificadores usados solo dentro de JSX (`eslint-scope` no recibe el flag `jsx`; el soporte nativo llega hasta ESLint 10, ver `eslint/eslint#20152`). Sin esto, cualquier import usado solo como `<Componente />` se marca como `no-unused-vars` aunque sí se use. Por eso `eslint.config.js` registra `eslint-plugin-react` únicamente para habilitar la regla `react/jsx-uses-vars` (no se adoptó el resto del `recommended` de ese plugin porque trae reglas como `react/prop-types` que no aplican aquí). No quitar esa regla ni el plugin sin reemplazar ese fix.
 
 ## Flujo de trabajo (dos colaboradores)
 
@@ -55,11 +56,10 @@ El código fuente del Apps Script (`doPost`, guarda en la Sheet + `MailApp.sendE
 ## Backlog pendiente (prioridad baja, no urgente)
 
 - Panel de "logros" en `Torneos.jsx`, marcado como "en construcción".
-- Fotos reales para las carpetas de galería que solo tienen `.gitkeep` (`comunidad`, `sedes`, `jugadores/sub-8`, `sub-12`, `sub-16`).
+- Fotos reales para las carpetas de galería que solo tienen `.gitkeep` (`comunidad`, `sedes`, `jugadores/sub-8`, `sub-12`). `jugadores/sub-16` ya tiene fotos reales (85 fotos agregadas).
 - Breakpoint intermedio de tablet (~900px).
 - Soporte de swipe táctil en `Lightbox`/`Galeria` para mobile.
 - Ajustar `WaFloat` en mobile (tamaño/posición con `safe-area-inset`, o colapsarlo cerca del footer).
-- SEO/meta: `index.html` tiene `lang="en"` (debería ser `es`), `type="image/img"` inválido en el favicon `<link>`, falta `<meta name="description">` y Open Graph tags (importa para las previews al compartir por WhatsApp/Facebook), y `public/favicon.svg` existe pero no está referenciado.
 - Datos estructurados schema.org (`SportsActivityLocation`) ahora que Sedes tiene mapas reales embebidos.
 - Analítica básica (visitas, clics en CTA/WhatsApp) — hoy no hay ninguna.
 - Sección de testimonios.
