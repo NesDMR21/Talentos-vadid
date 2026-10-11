@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
-import Logo from '../img/Logo.png'
+import Logo from '../img/Logo.png?w=96&format=webp'
 
+// desktop: false = solo aparece en el menú móvil (en escritorio no caben todos)
 const LINKS = [
   { href: '#sobre', label: 'Nosotros' },
   { href: '#categorias', label: 'Categorías' },
   { href: '#staff', label: 'Staff' },
   { href: '#metodologia', label: 'Método' },
   { href: '#proyeccion', label: 'Proyección' },
-  { href: '#torneos', label: 'Torneos' },
+  { href: '#torneos', label: 'Torneos', desktop: false },
+  { href: '#galeria', label: 'Galería' },
   { href: '#sedes', label: 'Sedes' },
+  { href: '#faq', label: 'Preguntas', desktop: false },
 ]
 
 export default function Navbar() {
@@ -23,9 +26,15 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    if (!menuOpen) return
+    document.body.style.overflow = 'hidden'
+    const onKey = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
     return () => {
       document.body.style.overflow = ''
+      document.removeEventListener('keydown', onKey)
     }
   }, [menuOpen])
 
@@ -33,17 +42,10 @@ export default function Navbar() {
 
   return (
     <>
-      <nav id="navbar" className={scrolled ? 'scrolled' : ''} role="navigation">
+      <nav id="navbar" className={scrolled || menuOpen ? 'scrolled' : ''} aria-label="Principal">
         <div className="nav-inner">
           <a href="#hero" className="nav-logo">
-            <svg className="logo-shield" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <image href={Logo} x="5" y="5" width="50" height="50" preserveAspectRatio="xMidYMid meet" />
-              <defs>
-                <clipPath id="shield-clip">
-                  <path d="M30 3L5 12V30C5 44 30 57 30 57C30 57 55 44 55 30V12L30 3Z" />
-                </clipPath>
-              </defs>
-            </svg>
+            <img className="logo-shield" src={Logo} alt="" width="44" height="44" />
             <div className="logo-text">
               TALENTOS VADID
               <span>Club Deportivo · Bogotá DC</span>
@@ -51,7 +53,7 @@ export default function Navbar() {
           </a>
 
           <ul className="nav-links">
-            {LINKS.map((link) => (
+            {LINKS.filter((link) => link.desktop !== false).map((link) => (
               <li key={link.href}>
                 <a href={link.href}>{link.label}</a>
               </li>
@@ -64,9 +66,11 @@ export default function Navbar() {
           </ul>
 
           <button
+            type="button"
             className="hamburger"
-            aria-label="Abrir menú"
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
             onClick={() => setMenuOpen((v) => !v)}
           >
             <span />
@@ -76,14 +80,14 @@ export default function Navbar() {
         </div>
       </nav>
 
-      <div className={'mobile-menu' + (menuOpen ? ' open' : '')}>
+      <div id="mobile-menu" className={'mobile-menu' + (menuOpen ? ' open' : '')} inert={!menuOpen}>
         {LINKS.map((link) => (
           <a key={link.href} href={link.href} className="mob-link" onClick={closeMenu}>
             {link.label}
           </a>
         ))}
         <a href="#contacto" className="mob-link" onClick={closeMenu}>
-          Contacto
+          Inscríbete
         </a>
       </div>
     </>

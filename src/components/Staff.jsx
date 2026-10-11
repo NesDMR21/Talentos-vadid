@@ -26,15 +26,12 @@ export default function Staff() {
               >
                 <div className="staff-photo">
                   {member.photo ? (
-                    <>
-                      <img className="staff-photo-bg" src={member.photo} alt="" aria-hidden="true" />
-                      <img className="staff-photo-fg" src={member.photo} alt={member.name} loading="lazy" />
-                    </>
+                    <img src={member.photo} alt={`${member.name}, ${member.role}`} loading="lazy" width="480" height="720" />
                   ) : (
                     <FaUserTie />
                   )}
                 </div>
-                <div className="staff-name">{member.name}</div>
+                <h3 className="staff-name">{member.name}</h3>
                 <div className="staff-role">{member.role}</div>
               </div>
             ))}

@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useId, useState } from 'react'
 
 const faqData = [
   {
     q: '¿Desde qué edad reciben jugadores?',
-    a: 'Recibimos jugadores desde los 5 años en adelante. Contamos con categorías Baby Fútbol (desde 2018), Sub-12 (2014), Sub-16 (2010) y Sub-20 (2006). Cada categoría tiene un enfoque y metodología adaptada a la edad y desarrollo del jugador.',
+    a: 'Recibimos jugadores desde los 5 años. Contamos con las categorías Baby Fútbol (2018 a 2021), Sub-12 (2014), Sub-16 (2010) y Sub-20 (2006). Cada categoría tiene un enfoque y una metodología adaptados a la edad y al desarrollo del jugador.',
+  },
+  {
+    q: '¿Dónde y a qué hora entrenan?',
+    a: 'En el Parque Gilma Jiménez entrenamos lunes y viernes de 6:00 a 8:00 PM, miércoles de 4:00 a 6:00 PM y sábados de 8:00 a 10:00 AM. En las Canchas Nico de Suba entrenamos martes y jueves de 4:00 a 6:00 PM.',
   },
   {
     q: '¿Puedo asistir a una prueba sin inscribirme?',
-    a: '¡Sí! Invitamos a todos los interesados a asistir a una prueba de selección sin compromiso. Es la mejor manera de conocer nuestra metodología y que nuestro cuerpo técnico evalúe las capacidades del jugador. Contáctanos por WhatsApp para coordinar.',
+    a: '¡Sí! Invitamos a todos los interesados a una prueba de selección sin costo y sin compromiso. Es la mejor manera de conocer nuestra metodología y de que nuestro cuerpo técnico evalúe las capacidades del jugador. Escríbenos por WhatsApp para coordinarla.',
   },
   {
     q: '¿Qué debo llevar a la primera prueba?',
@@ -15,36 +19,39 @@ const faqData = [
   },
   {
     q: '¿Las categorías son mixtas?',
-    a: 'Sí. Las categorías 2010 y 2018 son mixtas, participando niños y niñas en los mismos entrenamientos y competencias. Creemos en la inclusión y en el fútbol como un deporte para todos sin distinción de género.',
+    a: 'Sí. Las categorías 2010 y Baby Fútbol son mixtas: niños y niñas participan en los mismos entrenamientos y competencias. Creemos en el fútbol como un deporte para todos.',
   },
   {
     q: '¿Participan en torneos y competencias oficiales?',
-    a: 'Absolutamente. Competimos en la Liga de Fútbol de Bogotá, el Hexagonal del Suroriente, Hexagonal de Timiza, Liga de Suroriente y Copa Ciudad Capital. La experiencia competitiva real es fundamental en nuestra metodología.',
+    a: 'Sí. Competimos en la Liga de Fútbol de Bogotá, el Hexagonal del Suroriente, el Hexagonal de Timiza, la Liga de Suroriente y la Copa Ciudad Capital. La experiencia competitiva real es fundamental en nuestra metodología.',
   },
   {
     q: '¿Cómo puedo inscribir a mi hijo/a?',
-    a: 'El proceso es sencillo: contáctanos por WhatsApp (+57 313 456 5039) o llena el formulario en esta página. Coordinaremos una prueba de valoración y si el jugador es seleccionado, te explicaremos todo el proceso de inscripción formal. También puedes escribir a clubvadid.futbol@gmail.com.',
+    a: 'Escríbenos por WhatsApp (+57 313 456 5039) o llena el formulario de esta página. Coordinamos una prueba de valoración y, si el jugador es seleccionado, te explicamos todo el proceso de inscripción formal. También puedes escribir a clubvadid.futbol@gmail.com.',
   },
 ]
 
 function FaqItem({ item, open, onToggle }) {
-  const [maxHeight, setMaxHeight] = useState(0)
-
-  useEffect(() => {
-    const el = document.getElementById(`faq-a-${item.q}`)
-    if (!el) return
-    requestAnimationFrame(() => {
-      setMaxHeight(open ? el.scrollHeight : 0)
-    })
-  }, [open, item.q])
+  const id = useId()
 
   return (
     <div className="faq-item">
-      <button className={'faq-q' + (open ? ' active' : '')} aria-expanded={open} onClick={onToggle}>
-        {item.q}
-        <span className="faq-icon">+</span>
-      </button>
-      <div id={`faq-a-${item.q}`} className="faq-a" style={{ maxHeight }}>
+      <h3 style={{ margin: 0 }}>
+        <button
+          type="button"
+          className={'faq-q' + (open ? ' active' : '')}
+          aria-expanded={open}
+          aria-controls={id}
+          id={`${id}-q`}
+          onClick={onToggle}
+        >
+          {item.q}
+          <span className="faq-icon" aria-hidden="true">
+            +
+          </span>
+        </button>
+      </h3>
+      <div id={id} className={'faq-a' + (open ? ' open' : '')} role="region" aria-labelledby={`${id}-q`} inert={!open}>
         <div className="faq-a-inner">{item.a}</div>
       </div>
     </div>
@@ -81,4 +88,3 @@ export default function Faq() {
     </section>
   )
 }
-

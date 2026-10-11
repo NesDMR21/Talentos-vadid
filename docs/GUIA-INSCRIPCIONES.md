@@ -25,6 +25,7 @@ Así, si el WhatsApp no se llega a enviar (por ejemplo, la persona cierra la pes
 | Email | Correo de contacto |
 | Teléfono | Teléfono/WhatsApp de contacto |
 | Mensaje | Comentario adicional (si lo escribieron — es opcional) |
+| Autorización | "Sí" si aceptaron el tratamiento de datos (es obligatorio para enviar) |
 
 Puedes ordenar por fecha, buscar un nombre, o marcar con color las que ya contactaste — es una hoja de cálculo normal, como Excel.
 

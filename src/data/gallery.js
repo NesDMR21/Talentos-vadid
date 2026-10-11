@@ -1,6 +1,6 @@
 // Cómo subir fotos reales del club a la galería:
 // 1. Copia el archivo (jpg, jpeg, png o webp) dentro de la subcarpeta de su categoría en src/img/galeria/:
-//    entrenamientos/ · partidos/ · jugadores/ · sedes/ · comunidad/
+//    jugadores/ · partidos/ · competencias/ · entrenamientos/ · eventos/ · profesores/ · sedes/ · comunidad/
 // 2. Opcional: si la foto es de una categoría de edad específica, colócala en una subcarpeta con el
 //    slug de esa categoría, por ejemplo src/img/galeria/jugadores/sub-20/. Slugs disponibles: sub-20,
 //    sub-16, sub-12, sub-8. Esto habilita un filtro extra por edad dentro de esa categoría en la web.
@@ -29,9 +29,12 @@ const fullModules = import.meta.glob('../img/galeria/**/*.{jpg,jpeg,png,webp,JPG
 })
 
 export const CATEGORIES = [
-  { key: 'entrenamientos', label: 'Entrenamientos' },
-  { key: 'partidos', label: 'Partidos' },
   { key: 'jugadores', label: 'Jugadores' },
+  { key: 'partidos', label: 'Partidos' },
+  { key: 'competencias', label: 'Competencias' },
+  { key: 'entrenamientos', label: 'Entrenamientos' },
+  { key: 'eventos', label: 'Eventos' },
+  { key: 'profesores', label: 'Profesores' },
   { key: 'sedes', label: 'Sedes' },
   { key: 'comunidad', label: 'Comunidad' },
 ]
@@ -40,7 +43,7 @@ export const TEAMS = [
   { key: 'sub-20', label: 'Sub-20' },
   { key: 'sub-16', label: 'Sub-16' },
   { key: 'sub-12', label: 'Sub-12' },
-  { key: 'sub-8', label: 'Sub-8' },
+  { key: 'sub-8', label: 'Baby Fútbol' },
 ]
 
 const CATEGORY_LABELS = Object.fromEntries(CATEGORIES.map((c) => [c.key, c.label]))
@@ -62,6 +65,6 @@ export const galleryImages = Object.keys(fullModules)
       thumb: thumbModules[path],
       featured: featuredModules[path],
       src: fullModules[path],
-      alt: `Club Deportivo Talentos Vadid — ${categoryLabel}${teamLabel ? ` ${teamLabel}` : ''} — foto ${idx + 1}`,
+      alt: `Talentos Vadid · ${categoryLabel}${teamLabel ? ` ${teamLabel}` : ''}`,
     }
   })

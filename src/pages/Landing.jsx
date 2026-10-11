@@ -14,7 +14,7 @@ import Contacto from '../components/Contacto.jsx'
 import Footer from '../components/Footer.jsx'
 import WaFloat from '../components/WaFloat.jsx'
 import InitAos from '../components/InitAos.jsx'
-import Logo from '../img/Logo.png'
+import Logo from '../img/Logo.png?w=820&format=webp'
 
 export default function Landing() {
   return (
@@ -22,7 +22,7 @@ export default function Landing() {
       <InitAos />
       <IntroOverlay />
       <div className="shield-bg">
-        <img src={Logo} alt="" aria-hidden="true" />
+        <img src={Logo} alt="" aria-hidden="true" width="820" height="820" />
       </div>
       <Navbar />
 
@@ -38,11 +38,10 @@ export default function Landing() {
         <Sedes />
         <Faq />
         <Contacto />
-        <Footer />
       </main>
 
+      <Footer />
       <WaFloat />
     </>
   )
 }
-
