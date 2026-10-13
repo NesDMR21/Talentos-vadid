@@ -59,14 +59,17 @@ export default function Torneos() {
           </div>
 
           <div className="logros-panel" data-aos="fade-left">
-            <div className="logros-title">TÍTULOS & RECONOCIMIENTOS</div>
+            <div className="logros-title">COMPETIR PARA CRECER</div>
             <p className="logros-text">
-              Seguimos construyendo nuestro palmarés con cada temporada. El esfuerzo de nuestros jugadores y cuerpo técnico se verá reflejado en los trofeos que están por llegar.
+              Cada torneo es parte del proceso: nuestros jugadores ponen a prueba lo que entrenan frente a rivales reales, aprenden a
+              manejar la presión y construyen el carácter competitivo que exige el fútbol profesional.
             </p>
             <div
-              style={{ width: 60, height: 1.5, background: 'linear-gradient(90deg,var(--gold),transparent)', margin: '0 auto 28px' }}
+              style={{ width: 60, height: 1.5, background: 'linear-gradient(90deg,var(--gold),transparent)', margin: '0 auto' }}
             />
-            <span className="logros-coming">🏆 En construcción · Stay tuned</span>
+            <a href="#proyeccion" className="logros-link">
+              De estas canchas a Croacia: conoce la historia de Johan →
+            </a>
           </div>
         </div>
       </div>

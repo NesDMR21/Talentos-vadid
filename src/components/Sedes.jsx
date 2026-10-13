@@ -3,11 +3,17 @@ const sedes = [
     name: 'Parque Gilma Jiménez',
     address: 'Bogotá DC · Suroriente',
     mapsQuery: 'Parque Gilma Jiménez, Bogotá DC',
+    horarios: [
+      { dia: 'Lunes y viernes', hora: '6:00 PM – 8:00 PM' },
+      { dia: 'Miércoles', hora: '4:00 PM – 6:00 PM' },
+      { dia: 'Sábados', hora: '8:00 AM – 10:00 AM' },
+    ],
   },
   {
     name: 'Canchas Nico — Suba',
     address: 'Bogotá DC · Localidad de Suba',
     mapsQuery: 'Canchas Nico, Suba, Bogotá DC',
+    horarios: [{ dia: 'Martes y jueves', hora: '4:00 PM – 6:00 PM' }],
   },
 ]
 
@@ -50,23 +56,17 @@ export default function Sedes() {
                 <p className="sede-address">
                   {sede.address}
                   {' · '}
-                  <a href={mapsUrl(sede.mapsQuery)} target="_blank" rel="noopener">
+                  <a href={mapsUrl(sede.mapsQuery)} target="_blank" rel="noopener noreferrer">
                     Ver en Google Maps
                   </a>
                 </p>
                 <p className="horarios-title">Horarios de entrenamiento</p>
-                <div className="horario-row">
-                  <span className="horario-dia">Lunes y Viernes</span>
-                  <span className="horario-hora">6:00PM – 8:00PM</span>
-                </div>
-                <div className="horario-row">
-                  <span className="horario-dia">Miércoles</span>
-                  <span className="horario-hora">4:00PM – 6:00PM</span>
-                </div>
-                <div className="horario-row">
-                  <span className="horario-dia">Sábados y Domingos</span>
-                  <span className="horario-hora">8:00AM – 10:00AM</span>
-                </div>
+                {sede.horarios.map((h) => (
+                  <div className="horario-row" key={h.dia}>
+                    <span className="horario-dia">{h.dia}</span>
+                    <span className="horario-hora">{h.hora}</span>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
@@ -78,7 +78,7 @@ export default function Sedes() {
           <a
             href="https://wa.me/573134565039?text=Hola%2C%20quisiera%20agendar%20una%20prueba%20de%20selecci%C3%B3n%20en%20Club%20Deportivo%20Talentos%20Vadid."
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             className="btn-primary"
           >
             Agenda tu prueba →
@@ -88,4 +88,3 @@ export default function Sedes() {
     </section>
   )
 }
-

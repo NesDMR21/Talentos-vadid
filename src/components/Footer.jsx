@@ -1,4 +1,4 @@
-import Logo from '../img/Logo.png'
+import Logo from '../img/Logo.png?w=96&format=webp'
 import { MdOutlineAlternateEmail } from 'react-icons/md'
 import { AiFillInstagram, AiFillTikTok } from 'react-icons/ai'
 import { FaFacebook, FaWhatsappSquare } from 'react-icons/fa'
@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="footer-top">
           <div className="footer-brand">
             <div className="footer-logo">
-              <img src={Logo} alt="Talentos Vadid" style={{ width: 44, height: 44, objectFit: 'contain' }} />
+              <img src={Logo} alt="" width="44" height="44" style={{ objectFit: 'contain' }} />
               <div style={{ fontFamily: 'var(--font-cond)', fontSize: '1rem', fontWeight: 700, letterSpacing: '.06em' }}>
                 TALENTOS VADID
                 <div style={{ fontSize: '.72rem', fontWeight: 400, letterSpacing: '.08em', color: 'var(--gold)', marginTop: 2 }}>
@@ -18,7 +18,7 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <p>Formando campeones con disciplina, carácter y pasión por el fútbol. Bogotá DC, Colombia.</p>
+            <p>Club Vadid: escuela de fútbol para niños y jóvenes desde los 5 años. Formando campeones con disciplina, carácter y pasión por el fútbol en Bogotá DC, Colombia.</p>
             <p className="footer-slogan">✦ Forjando disciplina, creando campeones ✦</p>
           </div>
 
@@ -32,7 +32,7 @@ export default function Footer() {
                 <a href="#categorias">Categorías</a>
               </li>
               <li>
-                <a href="#metodologia">Formación Integral</a>
+                <a href="#staff">Staff</a>
               </li>
               <li>
                 <a href="#metodologia">Metodología</a>
@@ -68,22 +68,22 @@ export default function Footer() {
             <p className="footer-col-title">Redes Sociales</p>
             <ul className="footer-links">
               <li>
-                <a href="https://www.instagram.com/club_vadid/" target="_blank" rel="noopener">
+                <a href="https://www.instagram.com/club_vadid/" target="_blank" rel="noopener noreferrer">
                   <AiFillInstagram /> Instagram
                 </a>
               </li>
               <li>
-                <a href="https://www.tiktok.com/@club.vadid" target="_blank" rel="noopener">
+                <a href="https://www.tiktok.com/@club.vadid" target="_blank" rel="noopener noreferrer">
                   <AiFillTikTok /> TikTok
                 </a>
               </li>
               <li>
-                <a href="https://www.facebook.com/andresska96/" target="_blank" rel="noopener">
+                <a href="https://www.facebook.com/andresska96/" target="_blank" rel="noopener noreferrer">
                   <FaFacebook /> Facebook
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/573134565039" target="_blank" rel="noopener">
+                <a href="https://wa.me/573134565039" target="_blank" rel="noopener noreferrer">
                   <FaWhatsappSquare /> WhatsApp
                 </a>
               </li>
@@ -97,11 +97,13 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p className="footer-copy">© 2024 Club Deportivo Talentos Vadid · Bogotá DC, Colombia · Todos los derechos reservados.</p>
+          <p className="footer-copy">
+            © {new Date().getFullYear()} Club Deportivo Talentos Vadid · Bogotá DC, Colombia · Todos los derechos reservados.
+          </p>
           <div className="footer-bottom-links">
             <a href="#hero">Inicio</a>
             <a href="mailto:clubvadid.futbol@gmail.com">Contacto</a>
-            <a href="https://wa.me/573134565039" target="_blank" rel="noopener">
+            <a href="https://wa.me/573134565039" target="_blank" rel="noopener noreferrer">
               WhatsApp
             </a>
           </div>

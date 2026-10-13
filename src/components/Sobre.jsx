@@ -2,7 +2,7 @@ import { IoMdFootball } from 'react-icons/io'
 import { FaHorseHead } from 'react-icons/fa'
 import { GiMightyForce } from 'react-icons/gi'
 import { IoAirplaneSharp } from 'react-icons/io5'
-import sobreImg from '../img/sobre.jpg'
+import sobreImg from '../img/sobre.jpg?w=828&format=webp'
 
 export default function Sobre() {
   return (
@@ -13,8 +13,10 @@ export default function Sobre() {
             <div className="sobre-img">
               <img
                 src={sobreImg}
-                alt="Entrenamiento Club Deportivo Talentos Vadid"
+                alt="Entrenamiento de niños en el Club Deportivo Talentos Vadid"
                 loading="lazy"
+                width="828"
+                height="1024"
               />
               <div className="sobre-img-overlay" />
             </div>

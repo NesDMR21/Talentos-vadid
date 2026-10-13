@@ -1,9 +1,8 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { MdOutlineAlternateEmail } from 'react-icons/md'
-import { FaPhoneAlt } from 'react-icons/fa'
+import { FaFacebook, FaPhoneAlt } from 'react-icons/fa'
 import { FaMapLocationDot } from 'react-icons/fa6'
 import { AiFillInstagram, AiFillTikTok } from 'react-icons/ai'
-import { FaFacebook } from 'react-icons/fa'
 import WhatsappIcon from './WhatsappIcon.jsx'
 
 const INITIAL_FORM = {
@@ -14,6 +13,23 @@ const INITIAL_FORM = {
   email: '',
   telefono: '',
   mensaje: '',
+  autorizacion: false,
+  website: '', // honeypot: los humanos no lo ven; si viene lleno es un bot
+}
+
+const WA_NUMBER = '573134565039'
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+
+function validate(form) {
+  const errors = {}
+  if (!form.nombre.trim()) errors.nombre = 'Escribe el nombre del jugador.'
+  const edad = Number(form.edad)
+  if (!form.edad || edad < 5 || edad > 21) errors.edad = 'La edad debe estar entre 5 y 21 años.'
+  if (!form.categoria) errors.categoria = 'Selecciona una categoría.'
+  if (!EMAIL_RE.test(form.email.trim())) errors.email = 'Escribe un correo válido.'
+  if (form.telefono.replace(/\D/g, '').length < 7) errors.telefono = 'Escribe un teléfono válido.'
+  if (!form.autorizacion) errors.autorizacion = 'Debes autorizar el tratamiento de datos para continuar.'
+  return errors
 }
 
 function buildWaMessage(data) {
@@ -45,30 +61,34 @@ function saveToSheet(data) {
 }
 
 export default function Contacto() {
-  const waNumber = '573134565039'
-  const action = useMemo(() => `https://wa.me/${waNumber}`, [waNumber])
   const [form, setForm] = useState(INITIAL_FORM)
+  const [errors, setErrors] = useState({})
+  const [sent, setSent] = useState(false)
 
   const handleChange = (e) => {
-    const { id, value } = e.target
-    setForm((prev) => ({ ...prev, [id]: value }))
+    const { id, value, type, checked } = e.target
+    setForm((prev) => ({ ...prev, [id]: type === 'checkbox' ? checked : value }))
+    if (errors[id]) setErrors((prev) => ({ ...prev, [id]: undefined }))
   }
 
   const onSubmit = (e) => {
     e.preventDefault()
+    if (form.website) return
+
+    const found = validate(form)
+    setErrors(found)
+    if (Object.keys(found).length > 0) return
 
     const { nombre, edad, categoria, email, telefono, acudiente, mensaje } = form
+    const data = { nombre, edad, categoria, email, telefono, acudiente, mensaje }
 
-    if (!nombre || !edad || !categoria || !email || !telefono) {
-      alert('Por favor completa los campos requeridos.')
-      return
-    }
-
-    const waMsg = buildWaMessage({ nombre, edad, categoria, email, telefono, acudiente, mensaje })
-
-    saveToSheet({ nombre, edad, categoria, email, telefono, acudiente, mensaje })
-    window.open(`${action}?text=${waMsg}`, '_blank', 'noopener')
+    saveToSheet({ ...data, autorizacion: 'Sí', website: form.website })
+    window.open(`https://wa.me/${WA_NUMBER}?text=${buildWaMessage(data)}`, '_blank', 'noopener')
+    setSent(true)
   }
+
+  const errorList = Object.values(errors).filter(Boolean)
+  const invalid = (field) => (errors[field] ? true : undefined)
 
   return (
     <section id="contacto" className="section">
@@ -107,7 +127,7 @@ export default function Contacto() {
               <div>
                 <div className="contact-detail-label">WhatsApp Business</div>
                 <div className="contact-detail-val">
-                  <a href="https://wa.me/573134565039" target="_blank" rel="noopener">
+                  <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noopener noreferrer">
                     +57 313 456 5039
                   </a>
                 </div>
@@ -135,16 +155,16 @@ export default function Contacto() {
             </div>
 
             <div className="social-row">
-              <a href="https://www.instagram.com/club_vadid/" target="_blank" rel="noopener" className="social-btn">
+              <a href="https://www.instagram.com/club_vadid/" target="_blank" rel="noopener noreferrer" className="social-btn">
                 <AiFillInstagram /> Instagram
               </a>
-              <a href="https://www.tiktok.com/@club.vadid" target="_blank" rel="noopener" className="social-btn">
+              <a href="https://www.tiktok.com/@club.vadid" target="_blank" rel="noopener noreferrer" className="social-btn">
                 <AiFillTikTok /> TikTok
               </a>
               <a
                 href="https://www.facebook.com/andresska96/"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 className="social-btn"
               >
                 <FaFacebook /> Facebook
@@ -152,9 +172,9 @@ export default function Contacto() {
             </div>
 
             <a
-              href="https://wa.me/573134565039?text=Hola%2C%20quiero%20inscribir%20a%20mi%20hijo%20en%20el%20Club%20Deportivo%20Talentos%20Vadid."
+              href={`https://wa.me/${WA_NUMBER}?text=Hola%2C%20quiero%20inscribir%20a%20mi%20hijo%20en%20el%20Club%20Deportivo%20Talentos%20Vadid.`}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="whatsapp-direct"
               style={{ marginTop: 24 }}
             >
@@ -174,6 +194,7 @@ export default function Contacto() {
                     className="form-input"
                     type="text"
                     id="nombre"
+                    aria-invalid={invalid('nombre')}
                     placeholder="Nombre completo"
                     value={form.nombre}
                     onChange={handleChange}
@@ -189,9 +210,10 @@ export default function Contacto() {
                     className="form-input"
                     type="number"
                     id="edad"
+                    aria-invalid={invalid('edad')}
                     placeholder="Ej: 12"
                     min="5"
-                    max="25"
+                    max="21"
                     value={form.edad}
                     onChange={handleChange}
                     required
@@ -205,6 +227,7 @@ export default function Contacto() {
                   <select
                     className="form-select"
                     id="categoria"
+                    aria-invalid={invalid('categoria')}
                     value={form.categoria}
                     onChange={handleChange}
                     required
@@ -215,7 +238,7 @@ export default function Contacto() {
                     <option value="2006">2006 · Sub-20</option>
                     <option value="2010">2010 · Sub-16 (Mixta)</option>
                     <option value="2014">2014 · Sub-12</option>
-                    <option value="2018">2018 · Baby Fútbol</option>
+                    <option value="2018-2021">2018 a 2021 · Baby Fútbol (desde 5 años)</option>
                   </select>
                 </div>
 
@@ -241,6 +264,7 @@ export default function Contacto() {
                     className="form-input"
                     type="email"
                     id="email"
+                    aria-invalid={invalid('email')}
                     placeholder="correo@ejemplo.com"
                     value={form.email}
                     onChange={handleChange}
@@ -256,6 +280,7 @@ export default function Contacto() {
                     className="form-input"
                     type="tel"
                     id="telefono"
+                    aria-invalid={invalid('telefono')}
                     placeholder="+57 300 000 0000"
                     value={form.telefono}
                     onChange={handleChange}
@@ -277,14 +302,56 @@ export default function Contacto() {
                 </div>
               </div>
 
+              <div className="form-hp" aria-hidden="true">
+                <label htmlFor="website">No llenar este campo</label>
+                <input type="text" id="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={handleChange} />
+              </div>
+
+              <label className="form-consent" htmlFor="autorizacion">
+                <input
+                  type="checkbox"
+                  id="autorizacion"
+                  checked={form.autorizacion}
+                  onChange={handleChange}
+                  aria-invalid={invalid('autorizacion')}
+                />
+                <span>
+                  Soy el jugador (mayor de edad) o su acudiente y autorizo al Club Deportivo Talentos Vadid a tratar estos datos para
+                  gestionar la inscripción. *
+                </span>
+              </label>
+              <details className="form-policy">
+                <summary>Ver tratamiento de datos</summary>
+                <p>
+                  En cumplimiento de la Ley 1581 de 2012, los datos de este formulario se usan únicamente para contactarte sobre la
+                  prueba y el proceso de inscripción en el Club Deportivo Talentos Vadid. No se venden ni se comparten con terceros.
+                  Cuando el jugador es menor de edad, la autorización la da su padre, madre o acudiente. Puedes consultar, corregir o
+                  pedir que eliminemos tus datos escribiendo a clubvadid.futbol@gmail.com.
+                </p>
+              </details>
+
+              {errorList.length > 0 && (
+                <div className="form-error" role="alert">
+                  {errorList.map((msg) => (
+                    <div key={msg}>{msg}</div>
+                  ))}
+                </div>
+              )}
+
+              {sent && errorList.length === 0 && (
+                <p className="form-policy" role="status" style={{ color: 'var(--gold)' }}>
+                  ¡Listo! Abrimos WhatsApp con tu solicitud. Si no se abrió, escríbenos al +57 313 456 5039.
+                </p>
+              )}
+
               <button type="submit" className="form-submit">
-                Enviar solicitud de inscripción →
+                Enviar inscripción →
               </button>
 
               <a
-                href="https://wa.me/573134565039?text=Hola%2C%20quiero%20información%20sobre%20el%20Club%20Deportivo%20Talentos%20Vadid."
+                href={`https://wa.me/${WA_NUMBER}?text=Hola%2C%20quiero%20información%20sobre%20el%20Club%20Deportivo%20Talentos%20Vadid.`}
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 className="whatsapp-direct"
               >
                 <WhatsappIcon />

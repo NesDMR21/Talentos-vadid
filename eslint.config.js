@@ -33,4 +33,9 @@ export default defineConfig([
       'react/jsx-uses-vars': 'error',
     },
   },
+  {
+    // Archivos de configuración y scripts que corren en Node, no en el navegador.
+    files: ['*.config.js', 'scripts/**/*.{js,mjs}'],
+    languageOptions: { globals: globals.node },
+  },
 ])

@@ -1,6 +1,6 @@
-import { GiWorld } from "react-icons/gi";
+import { GiWorld } from 'react-icons/gi'
 import Tabs from './Tabs.jsx'
-import johanCamposImg from '../img/johan-campos.jpg'
+import johanCamposImg from '../img/johan-campos.jpg?w=720&format=webp'
 
 const etapas = [
   {
@@ -52,7 +52,7 @@ export default function Proyeccion() {
         <div className="proy-hero-card" data-aos="fade-up">
           <div className="proy-hero-inner">
             <div className="proy-photo">
-              <img src={johanCamposImg} alt="Johan Campos" loading="lazy" />
+              <img src={johanCamposImg} alt="Johan Campos, exjugador de Talentos Vadid, hoy en el NK Prigorje de Croacia" loading="lazy" width="720" height="709" />
               <div className="proy-photo-overlay" />
             </div>
 

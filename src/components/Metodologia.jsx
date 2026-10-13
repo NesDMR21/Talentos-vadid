@@ -4,7 +4,7 @@ import { PiBowlFoodBold, PiShootingStarFill } from 'react-icons/pi'
 import { GrDocumentPerformance } from 'react-icons/gr'
 import { TbRulerMeasure } from 'react-icons/tb'
 import Tabs from './Tabs.jsx'
-import metodologiaImg from '../img/metodologia.jpg'
+import metodologiaImg from '../img/metodologia.jpg?w=800&format=webp'
 
 const pilares = [
   { num: '01', title: 'Técnica Individual', text: 'Dominio del balón, control, conducción y golpeo. La base de todo gran futbolista se construye con repetición inteligente y corrección técnica constante.' },
@@ -63,7 +63,7 @@ export default function Metodologia() {
         <div className="meto-layout">
           <div className="meto-visual" style={{ position: 'relative' }} data-aos="fade-right">
             <div className="meto-img">
-              <img src={metodologiaImg} alt="Metodología de entrenamiento Vadid" loading="lazy" />
+              <img src={metodologiaImg} alt="Jugadores de Talentos Vadid recibiendo indicaciones del entrenador" loading="lazy" width="800" height="788" />
             </div>
             <div className="meto-img-overlay" />
           </div>

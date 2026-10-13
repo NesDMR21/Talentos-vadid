@@ -124,7 +124,7 @@ export default function Galeria() {
                     loading="lazy"
                   />
                   <div className="gallery-overlay">
-                    <span className="gallery-overlay-text">{item.alt}</span>
+                    <span className="gallery-overlay-text" aria-hidden="true">{item.alt}</span>
                   </div>
                 </div>
               ))}

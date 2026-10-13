@@ -9,6 +9,14 @@ const NOTIFY_EMAIL = 'garciajuandiego11@gmail.com'
 
 function doPost(e) {
   const data = JSON.parse(e.postData.contents)
+
+  // Anti-spam: el formulario tiene un campo oculto "website" que solo llenan
+  // los bots. Si viene lleno, o faltan datos básicos, se descarta en silencio.
+  if (data.website || !data.nombre || !data.telefono) {
+    return ContentService.createTextOutput(JSON.stringify({ ok: true }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME)
 
   sheet.appendRow([
@@ -20,12 +28,13 @@ function doPost(e) {
     data.email || '',
     data.telefono || '',
     data.mensaje || '',
+    data.autorizacion || '',
   ])
 
   MailApp.sendEmail({
     to: NOTIFY_EMAIL,
     subject: `Nueva inscripción: ${data.nombre || 'Sin nombre'}`,
-    body: `Nueva solicitud de inscripción desde la página web.\n\nJugador: ${data.nombre}\nEdad: ${data.edad}\nCategoría: ${data.categoria}\nAcudiente: ${data.acudiente || '-'}\nEmail: ${data.email}\nTeléfono: ${data.telefono}\nMensaje: ${data.mensaje || '-'}`,
+    body: `Nueva solicitud de inscripción desde la página web.\n\nJugador: ${data.nombre}\nEdad: ${data.edad}\nCategoría: ${data.categoria}\nAcudiente: ${data.acudiente || '-'}\nEmail: ${data.email}\nTeléfono: ${data.telefono}\nMensaje: ${data.mensaje || '-'}\nAutorizó tratamiento de datos: ${data.autorizacion || '-'}`,
   })
 
   return ContentService.createTextOutput(JSON.stringify({ ok: true }))
